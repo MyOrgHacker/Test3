@@ -8,3 +8,4 @@ on:
 jobs:
   call-workflow:
     uses: MyOrgHacker/Test2/.github/workflows/docker-image.yml@main
+    secrets: inherit

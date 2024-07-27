@@ -6,6 +6,7 @@ on:
       - main
 
 permissions: write-all
+security-events: write
 
 jobs:
   call-docker-workflow:

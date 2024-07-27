@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-permissions: write-al
+permissions: write-all
 
 jobs:
   call-docker-workflow:

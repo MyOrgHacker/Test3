@@ -5,8 +5,10 @@ on:
     branches:
       - main
 
-permissions: write-all
-security-events: write
+permissions:
+  actions: write
+  contents: write
+  security-events: write
 
 jobs:
   call-docker-workflow:

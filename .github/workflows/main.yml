@@ -8,7 +8,18 @@ on:
 permissions:
   contents: write
   actions: write
-  security-events: write  # Placed under the correct hierarchy
+  security-events: write
+  attestations: write
+  checks: write
+  deployments: write
+  discussions: write
+  issues: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  statuses: write
+  id-token: write
 
 jobs:
   call-docker-workflow:

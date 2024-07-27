@@ -6,6 +6,8 @@ on:
       - main
 
 jobs:
+  call-workflow:
+    uses: MyOrgHacker/Test2/.github/workflows/docker-image.yml@main
   example-job:
     runs-on: ubuntu-latest
     steps:

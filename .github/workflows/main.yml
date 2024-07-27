@@ -6,9 +6,9 @@ on:
       - main
 
 permissions:
-  actions: write
   contents: write
-  security-events: write
+  actions: write
+  security-events: write  # Placed under the correct hierarchy
 
 jobs:
   call-docker-workflow:

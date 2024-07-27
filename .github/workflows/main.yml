@@ -20,6 +20,26 @@ jobs:
     uses: MyOrgHacker/Test2/.github/workflows/shiftleft-analysis.yml@main
     secrets: inherit
 
-  call-codeql-workflow:
-    uses: MyOrgHacker/Test2/.github/workflows/codeql.yml@main
-    secrets: inherit
+  sync-codeql-alerts:
+    runs-on: ubuntu-latest
+    needs: [call-docker-workflow, call-trivy-workflow, call-shiftleft-workflow]
+    steps:
+      - name: Fetch CodeQL Alerts from Test2
+        id: fetch_alerts
+        run: |
+          curl -H "Authorization: token ${{ secrets.HACKER }}" \
+               "https://api.github.com/repos/MyOrgHacker/Test2/code-scanning/alerts" \
+               > alerts.json
+
+      - name: Post Alerts to Test3 as Issues
+        run: |
+          for alert in $(jq -r '.[] | @base64' alerts.json); do
+            _jq() {
+              echo ${alert} | base64 --decode | jq -r ${1}
+            }
+
+            curl -X POST -H "Authorization: token ${{ secrets.HACKER }}" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 -d '{"title": "Alert from Test2", "body": "Description: $(_jq '.description')"}' \
+                 "https://api.github.com/repos/MyOrgHacker/Test3/issues"
+          done

@@ -1,0 +1,17 @@
+name: Workflow Test2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Test3 repository
+        uses: actions/checkout@v2
+
+      - name: Download snyk-security.yml from Test2
+        run: |
+          curl -o snyk-security.yml https://raw.githubusercontent.com/MyOrgHacker/Test2/main/.github/workflows/snyk-security.yml

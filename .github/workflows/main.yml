@@ -1,4 +1,4 @@
-name: Workflow Test2
+name: Workflow using YAML from Test2
 
 on:
   push:
@@ -12,6 +12,42 @@ jobs:
       - name: Checkout Test3 repository
         uses: actions/checkout@v2
 
+      - name: Download docker-image.yml from Test2
+        run: curl -o .github/workflows/docker-image.yml https://raw.githubusercontent.com/MyOrgHacker/Test2/main/.github/workflows/docker-image.yml
+      
+      - name: Download main.yml from Test2
+        run: curl -o .github/workflows/main.yml https://raw.githubusercontent.com/MyOrgHacker/Test2/main/.github/workflows/main.yml
+
+      - name: Download shiftleft-analysis.yml from Test2
+        run: curl -o .github/workflows/shiftleft-analysis.yml https://raw.githubusercontent.com/MyOrgHacker/Test2/main/.github/workflows/shiftleft-analysis.yml
+
       - name: Download snyk-security.yml from Test2
+        run: curl -o .github/workflows/snyk-security.yml https://raw.githubusercontent.com/MyOrgHacker/Test2/main/.github/workflows/snyk-security.yml
+
+      - name: Download trivy.yml from Test2
+        run: curl -o .github/workflows/trivy.yml https://raw.githubusercontent.com/MyOrgHacker/Test2/main/.github/workflows/trivy.yml
+
+      - name: Execute docker-image workflow
         run: |
-          curl -o snyk-security.yml https://raw.githubusercontent.com/MyOrgHacker/Test2/main/.github/workflows/snyk-security.yml
+          cat .github/workflows/docker-image.yml
+          # Add commands to execute the workflow steps from docker-image.yml
+
+      - name: Execute main workflow
+        run: |
+          cat .github/workflows/main.yml
+          # Add commands to execute the workflow steps from main.yml
+
+      - name: Execute shiftleft-analysis workflow
+        run: |
+          cat .github/workflows/shiftleft-analysis.yml
+          # Add commands to execute the workflow steps from shiftleft-analysis.yml
+
+      - name: Execute snyk-security workflow
+        run: |
+          cat .github/workflows/snyk-security.yml
+          # Add commands to execute the workflow steps from snyk-security.yml
+
+      - name: Execute trivy workflow
+        run: |
+          cat .github/workflows/trivy.yml
+          # Add commands to execute the workflow steps from trivy.yml
